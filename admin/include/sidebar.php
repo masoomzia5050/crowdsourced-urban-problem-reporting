@@ -51,6 +51,9 @@ while($row=mysqli_fetch_array($query))
 					    <a href="state.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Add State</span></a>
 					</li>
 					<li class="nav-item">
+					    <a href="add-city.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Add City</span></a>
+					</li>
+					<li class="nav-item">
 					    <a href="manage-users.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Manage Users</span></a>
 					</li>
 
