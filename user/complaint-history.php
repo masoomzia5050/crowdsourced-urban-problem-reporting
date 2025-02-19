@@ -79,9 +79,11 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                                             <label for="status">Status</label>
                                             <select name="status" id="status" class="form-control">
                                                 <option value="">All</option>
-                                                <option value="in process" <?php if($statusFilter == 'in process') echo 'selected'; ?>>In Process</option>
-                                                <option value="closed" <?php if($statusFilter == 'closed') echo 'selected'; ?>>Closed</option>
                                                 <option value="not processed" <?php if($statusFilter == 'not processed') echo 'selected'; ?>>Not Processed Yet</option>
+                                                <option value="under review" <?php if($statusFilter == 'under review') echo 'selected'; ?>>Under Review</option>
+                                                <option value="in process" <?php if($statusFilter == 'in process') echo 'selected'; ?>>In Process</option>
+                                                <option value="closed" <?php if($statusFilter == 'closed') echo 'selected'; ?>>Complaint Resolved</option>
+                                                <option value="complaint rejected" <?php if($statusFilter == 'complaint Rejected') echo 'selected'; ?>>Complaint Rejected</option>
                                             </select>
                                         </div>
                                     </div>
@@ -166,10 +168,14 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                                                                 <?php $status=$row['status'];
                                                                 if($status==''): ?>
                                                                 <span class="badge badge-danger">Not Processed Yet</span>
+                                                                <?php elseif($status=='under review'):?>
+                                                                <span class="badge badge-secondary">Under Review</span>
                                                                 <?php elseif($status=='in process'):?>
                                                                 <span class="badge badge-warning">In Process</span>
                                                                 <?php elseif($status=='closed'):?>
-                                                                <span class="badge badge-success">Closed</span>
+                                                                <span class="badge badge-success">Complaint Resolved</span>
+                                                                <?php elseif($status=='complaint rejected'):?>
+                                                                <span class="badge badge-dark">Complaint Rejected</span>
                                                                 <?php endif;?>
                                                             </td>
                                                             <td>

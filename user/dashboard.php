@@ -154,6 +154,25 @@ else {
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="card text-white bg-info mb-3" onclick="redirectToComplaintHistory('under review')">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-spinner"></i>
+                                </div>
+                                <div class="col-8">
+                                    <?php 
+                                    $query = mysqli_query($con, "select complaintNumber from tblcomplaints where userId='$uid' and status='in process'");
+                                    $inProcessComplaints = mysqli_num_rows($query);
+                                    ?>
+                                    <h4><?php echo $inProcessComplaints; ?></h4>
+                                    <h6>Under Review Complants</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
                     <div class="card text-white bg-info mb-3" onclick="redirectToComplaintHistory('in process')">
                         <div class="card-body">
                             <div class="row">
@@ -166,7 +185,7 @@ else {
                                     $inProcessComplaints = mysqli_num_rows($query);
                                     ?>
                                     <h4><?php echo $inProcessComplaints; ?></h4>
-                                    <h6>Inprocess Complaints</h6>
+                                    <h6>In Process Complaints</h6>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +204,26 @@ else {
                                     $closedComplaints = mysqli_num_rows($query);
                                     ?>
                                     <h4><?php echo $closedComplaints; ?></h4>
-                                    <h6>Closed Complaints</h6>
+                                    <h6>Resolved Complaints</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-white bg-success mb-3" onclick="redirectToComplaintHistory('complaint')">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="col-8">
+                                    <?php 
+                                    $query = mysqli_query($con, "select complaintNumber from tblcomplaints where userId='$uid' and status='closed'");
+                                    $closedComplaints = mysqli_num_rows($query);
+                                    ?>
+                                    <h4><?php echo $closedComplaints; ?></h4>
+                                    <h6>Rejected Complaints</h6>
                                 </div>
                             </div>
                         </div>

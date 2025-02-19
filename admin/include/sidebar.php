@@ -72,13 +72,17 @@ while($row=mysqli_fetch_array($query))
 						<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Manage Complaint</span></a>
 						<ul class="pcoded-submenu">
 							<li>
-	<a href="all-complaint.php">All Complaints</a></li>
+						<a href="all-complaint.php">All Complaints</a></li>
 							<li>
-	<a href="notprocess-complaint.php">Not Process Yet</a></li>
+						<a href="notprocess-complaint.php">Not Process Yet</a></li>
 							<li>
-								<a href="inprocess-complaint.php">In Process</a></li>
-							
-							<li><a href="closed-complaint.php">Closed Complaints</a></li>
+						<a href="under-review-complaint.php">Under Review</a></li>	
+							<li>
+						<a href="inprocess-complaint.php">In Process</a></li>	
+							<li>
+						<a href="closed-complaint.php">Resolved Complaints</a></li>
+							<li>
+						<a href="rejected-complaint.php">Rejected Complaints</a></li>	
 							
 						</ul>
 					</li>

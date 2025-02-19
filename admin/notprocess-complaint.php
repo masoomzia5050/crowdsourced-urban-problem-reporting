@@ -101,14 +101,18 @@ while($row=mysqli_fetch_array($query))
                                             <td><?php echo htmlentities($row['complaintNumber']);?></td>
                                             <td><?php echo htmlentities($row['name']);?></td>
                                             <td> <?php echo htmlentities($row['regDate']);?></td>
-                                                                      <td>
-                                                <?php $status=$row['status'];
-                                                if($status==''): ?>
-                                                <span class="badge badge-danger">Not Processed Yet</span>
+                                            <td>
+                                            <?php $status=$row['status'];
+                                            if($status==''): ?>
+                                            <span class="badge badge-danger">Not Processed Yet</span>
+                                            <?php elseif($status=='under review'):?>
+                                            <span class="badge badge-secondary">Under Review</span>
                                             <?php elseif($status=='in process'):?>
-                                             <span class="badge badge-warning">In Process</span>
-                                         <?php elseif($status=='closed'):?>
-                                             <span class="badge badge-success">Closed</span>
+                                            <span class="badge badge-warning">In Process</span>
+                                            <?php elseif($status=='closed'):?>
+                                            <span class="badge badge-success">Complaint Resolved</span>
+                                            <?php elseif($status=='complaint rejected'):?>
+                                            <span class="badge badge-dark">Complaint Rejected</span>
                                          <?php endif;?>
 </td>
 

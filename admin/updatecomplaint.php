@@ -53,12 +53,10 @@ function f3()
                 <td>
                     <select name="status" required="required" class="form-control">
                         <option value="">Select Status</option>
-                        <option value="in process">In Process</option>
-                        <option value="closed">Closed</option>
                         <option value="under review">Under Review</option>
+                        <option value="in process">In Process</option>
+                        <option value="closed">Complaint Resolved</option>                 
                         <option value="complaint rejected">Complaint Rejected</option>
-                        <option value="complaint resolved">Complaint Resolved</option>
-                        <option value="requested for re-opened">Requested for Re-Opened</option>
                     </select>
                 </td>
             </tr>

@@ -2,6 +2,7 @@
 <?php
 session_start();
 include('include/config.php');
+error_reporting(0);
 if(strlen($_SESSION['aid'])==0)
     {   
 header('location:index.php');
@@ -16,7 +17,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 <html lang="en">
 
 <head>
-    <title>CMS|| Inprocess Complaints</title>
+    <title>CMS|| Under Review Complaints</title>
    
 
     <!-- vendor css -->
@@ -51,11 +52,11 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Inprocess Complaints</h5>
+                            <h5 class="m-b-10">Under Review Complaints</h5>
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="dashboard.php"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="inprocess-complaint.php">Inprocess Complaints</a></li>
+                            <li class="breadcrumb-item"><a href="under-review-complaint.php">Under Review Complaints</a></li>
                             
                         </ul>
                     </div>
@@ -71,7 +72,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                 <div class="card">
                  
                     <div class="card-body">
-                        <h5>View Inprocess Complaints</h5>
+                        <h5>View Under Review Complaints</h5>
                         <hr>
                        
                       <div class="row">
@@ -92,7 +93,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                                 </thead>
                                 <tbody>
                                     <?php 
-$st='in process';
+$st='under review';
 $query=mysqli_query($con,"select tblcomplaints.*,users.fullName as name from tblcomplaints join users on users.id=tblcomplaints.userId where tblcomplaints.status='$st'");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
@@ -104,7 +105,7 @@ while($row=mysqli_fetch_array($query))
                                             <td><?php echo htmlentities($row['name']);?></td>
                                             <td> <?php echo htmlentities($row['regDate']);?></td>
                                         
-                                        <td>
+                                                                                   <td>
                                                 <?php $status=$row['status'];
                                                 if($status==''): ?>
                                                 <span class="badge badge-danger">Not Processed Yet</span>

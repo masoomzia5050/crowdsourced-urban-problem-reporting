@@ -107,10 +107,14 @@ while($row=mysqli_fetch_array($query))
                                                 <?php $status=$row['status'];
                                                 if($status==''): ?>
                                                 <span class="badge badge-danger">Not Processed Yet</span>
-                                            <?php elseif($status=='in process'):?>
-                                             <span class="badge badge-warning">In Process</span>
-                                         <?php elseif($status=='closed'):?>
-                                             <span class="badge badge-success">Closed</span>
+                                                <?php elseif($status=='under review'):?>
+                                                <span class="badge badge-secondary">Under Review</span>
+                                                <?php elseif($status=='in process'):?>
+                                                <span class="badge badge-warning">In Process</span>
+                                                <?php elseif($status=='closed'):?>
+                                                <span class="badge badge-success">Complaint Resolved</span>
+                                                <?php elseif($status=='complaint rejected'):?>
+                                                <span class="badge badge-dark">Complaint Rejected</span>
                                          <?php endif;?>
 </td>
                                            
