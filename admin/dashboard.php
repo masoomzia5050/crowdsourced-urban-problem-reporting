@@ -12,15 +12,12 @@ else {
 <head>
     <title>Complaint Management System || Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Bootstrap CSS -->
-    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <!-- Font Awesome for Icons -->
-    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">-->
     <style>
         .card {
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: 0.3s;
+            margin-bottom: 20px;
         }
         .card:hover {
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
@@ -31,7 +28,7 @@ else {
         }
         .widget-warning-card {
             background-color: #ffc107;
-            color: white;
+            color: black;
         }
         .widget-success-card {
             background-color: #28a745;
@@ -43,6 +40,34 @@ else {
         }
         .widget-purple-card {
             background-color: #6f42c1;
+            color: white;
+        }
+        .widget-info-card {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .widget-secondary-card {
+            background-color: #6c757d;
+            color: white;
+        }
+        .widget-dark-card {
+            background-color: #343a40;
+            color: white;
+        }
+        .widget-light-card {
+            background-color: #f8f9fa;
+            color: black;
+        }
+        .widget-pink-card {
+            background-color: #e83e8c;
+            color: white;
+        }
+        .widget-orange-card {
+            background-color: #fd7e14;
+            color: white;
+        }
+        .widget-rejected-card {
+            background-color: #ff5733;
             color: white;
         }
     </style>
@@ -76,8 +101,7 @@ else {
             <!-- [ breadcrumb ] end -->
             <!-- [ Main Content ] start -->
             <div class="row">
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-primary-card start -->
+                <div class="col-md-6 col-xl-4">
                     <div class="card flat-card widget-primary-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
@@ -92,10 +116,9 @@ else {
                             </div>
                         </div>
                     </div>
-                    <!-- widget-primary-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-warning-card start -->
+                
+                <div class="col-md-6 col-xl-4">
                     <div class="card flat-card widget-warning-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
@@ -106,14 +129,13 @@ else {
                                 $totcategory = mysqli_num_rows($query2);
                                 ?>
                                 <h4><?php echo $totcategory;?></h4>
-                                <a href="category.php" style="color: white;"><h6>Total Category</h6></a>
+                                <a href="category.php" style="color: black;"><h6>Total Category</h6></a>
                             </div>
                         </div>
                     </div>
-                    <!-- widget-warning-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-success-card start -->
+                
+                <div class="col-md-6 col-xl-4">
                     <div class="card flat-card widget-success-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
@@ -128,11 +150,10 @@ else {
                             </div>
                         </div>
                     </div>
-                    <!-- widget-success-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-danger-card start -->
-                    <div class="card flat-card widget-danger-card">
+                
+                <div class="col-md-6 col-xl-4">
+                <div class="card flat-card widget-rejected-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
                                 <i class="fas fa-city"></i>
@@ -146,11 +167,10 @@ else {
                             </div>
                         </div>
                     </div>
-                    <!-- widget-danger-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-purple-card start -->
-                    <div class="card flat-card widget-purple-card">
+                
+                <div class="col-md-6 col-xl-4">
+                    <div class="card flat-card widget-info-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
                                 <i class="fas fa-globe"></i>
@@ -164,11 +184,10 @@ else {
                             </div>
                         </div>
                     </div>
-                    <!-- widget-purple-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-primary-card start -->
-                    <div class="card flat-card widget-primary-card">
+                
+                <div class="col-md-6 col-xl-4">
+                    <div class="card flat-card widget-pink-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
                                 <i class="fas fa-clipboard-list"></i>
@@ -182,10 +201,9 @@ else {
                             </div>
                         </div>
                     </div>
-                    <!-- widget-primary-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-warning-card start -->
+                
+                <div class="col-md-6 col-xl-4">
                     <div class="card flat-card widget-warning-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
@@ -196,14 +214,13 @@ else {
                                 $newcom = mysqli_num_rows($query7);
                                 ?>
                                 <h4><?php echo $newcom;?></h4>
-                                <a href="notprocess-complaint.php" style="color: white;"><h6>Pending Complaints</h6></a>
+                                <a href="notprocess-complaint.php" style="color: black;"><h6>Pending Complaints</h6></a>
                             </div>
                         </div>
                     </div>
-                    <!-- widget-warning-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-success-card start -->
+                
+                <div class="col-md-6 col-xl-4">
                     <div class="card flat-card widget-success-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
@@ -218,25 +235,57 @@ else {
                             </div>
                         </div>
                     </div>
-                    <!-- widget-success-card end -->
                 </div>
-                <div class="col-md-12 col-xl-4">
-                    <!-- widget-danger-card start -->
-                    <div class="card flat-card widget-danger-card">
+                
+                <div class="col-md-6 col-xl-4">
+                    <div class="card flat-card widget-secondary-card">
+                        <div class="row-table">
+                            <div class="col-sm-3 card-body">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="col-sm-9">
+                                <?php $query10 = mysqli_query($con, "select complaintNumber from tblcomplaints where status='under review'");
+                                $underreviewcom = mysqli_num_rows($query10);
+                                ?>
+                                <h4><?php echo $underreviewcom;?></h4>
+                                <a href="under-review-complaint.php" style="color: white;"><h6>Under Review Complaints</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-xl-4">
+                <div class="card flat-card widget-danger-card">
+                        <div class="row-table">
+                            <div class="col-sm-3 card-body">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="col-sm-9">
+                                <?php $query11 = mysqli_query($con, "select complaintNumber from tblcomplaints where status='complaint rejected'");
+                                $rejectedcom = mysqli_num_rows($query11);
+                                ?>
+                                <h4><?php echo $rejectedcom;?></h4>
+                                <a href="rejected-complaint.php" style="color: white;"><h6>Rejected Complaints</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-xl-4">
+                    <div class="card flat-card widget-orange-card">
                         <div class="row-table">
                             <div class="col-sm-3 card-body">
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div class="col-sm-9">
-                                <?php $query9 = mysqli_query($con, "select complaintNumber from tblcomplaints where status='closed'");
-                                $closedcom = mysqli_num_rows($query9);
+                                <?php $query12 = mysqli_query($con, "select complaintNumber from tblcomplaints where status='closed'");
+                                $closedcom = mysqli_num_rows($query12);
                                 ?>
                                 <h4><?php echo $closedcom;?></h4>
                                 <a href="closed-complaint.php" style="color: white;"><h6>Closed Complaints</h6></a>
                             </div>
                         </div>
                     </div>
-                    <!-- widget-danger-card end -->
                 </div>
             </div>
             <!-- [ Main Content ] end -->

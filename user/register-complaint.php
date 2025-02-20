@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('include/config.php');
-error_reporting(0);
 if(strlen($_SESSION['id'])==0)
 {   
     header('location:index.php');
@@ -19,6 +18,8 @@ else{
         $state=$_POST['state'];
         $city=$_POST['city'];
         $address=$_POST['address'];
+        $latitude=$_POST['latitude'];
+        $longitude=$_POST['longitude'];
         $noc=$_POST['noc'];
         $complaintdetials=$_POST['complaindetails'];
         $compfile=$_FILES["compfile"]["name"];
@@ -40,7 +41,7 @@ else{
             // Code for move image into directory
             move_uploaded_file($_FILES["compfile"]["tmp_name"],"complaintdocs/".$compfilenew);
 
-            $query=mysqli_query($con,"insert into tblcomplaints(userId,category,subcategory,complaintType,state,city,address,noc,complaintDetails,complaintFile) values('$uid','$category','$subcat','$complaintype','$state','$city','$address','$noc','$complaintdetials','$compfilenew')");
+            $query=mysqli_query($con,"insert into tblcomplaints(userId,category,subcategory,complaintType,state,city,address,latitude,longitude,noc,complaintDetails,complaintFile) values('$uid','$category','$subcat','$complaintype','$state','$city','$address','$latitude','$longitude','$noc','$complaintdetials','$compfilenew')");
             // code for show complaint number
             $sql=mysqli_query($con,"select complaintNumber from tblcomplaints order by complaintNumber desc limit 1");
             while($row=mysqli_fetch_array($sql))
@@ -51,6 +52,9 @@ else{
             echo '<script> alert("Your complaint has been successfully filed and your complaint number is "+"'.$complainno.'")</script>';
         }
     }
+
+    // Get the selected category from the URL parameter
+    $selectedCategory = isset($_GET['category']) ? $_GET['category'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +64,7 @@ else{
 
     <!-- vendor css -->
     <link rel="stylesheet" href="../admin/assets/css/style.css">
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places&callback=initMap" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
     function getCat(val) {
@@ -84,6 +88,29 @@ else{
                 $("#city").html(data);
 
             }
+        });
+    }
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 30.3753, lng: 69.3451}, // Centering map on Pakistan
+            zoom: 6
+        });
+        var geocoder = new google.maps.Geocoder();
+        var marker = new google.maps.Marker({
+            map: map,
+            draggable: true
+        });
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            document.getElementById('latitude').value = event.latLng.lat();
+            document.getElementById('longitude').value = event.latLng.lng();
+            marker.setPosition(event.latLng);
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function(event) {
+            document.getElementById('latitude').value = event.latLng.lat();
+            document.getElementById('longitude').value = event.latLng.lng();
         });
     }
     </script>
@@ -127,31 +154,30 @@ else{
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-10">
-
                                     <br />
                                     <form method="post" name="complaint" enctype="multipart/form-data">
-
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Category Name</label>
-                                            <select name="category" id="category" class="form-control" onChange="getCat(this.value);" required="">
+                                            <select name="category" id="category" class="form-control" onChange="getCat(this.value);" required="" <?php echo $selectedCategory ? 'disabled' : ''; ?>>
                                                 <option value="">Select Category</option>
                                                 <?php 
                                                 $sql = mysqli_query($con, "select id, categoryName from category");
                                                 while ($rw = mysqli_fetch_array($sql)) {
                                                 ?>
-                                                    <option value="<?php echo htmlentities($rw['id']); ?>"><?php echo htmlentities($rw['categoryName']); ?></option>
+                                                    <option value="<?php echo htmlentities($rw['id']); ?>" <?php echo $rw['categoryName'] === $selectedCategory ? 'selected' : ''; ?>><?php echo htmlentities($rw['categoryName']); ?></option>
                                                 <?php
                                                 }
                                                 ?>
                                             </select>
-
+                                            <?php if ($selectedCategory): ?>
+                                                <input type="hidden" name="category" value="<?php echo htmlspecialchars($selectedCategory); ?>">
+                                            <?php endif; ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Sub Category</label>
                                             <select name="subcategory" id="subcategory" class="form-control" >
                                                 <option value="">Select Subcategory</option>
                                             </select>
-
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Complaint Type</label>
@@ -159,7 +185,6 @@ else{
                                                 <option value="Complaint">Complaint</option>
                                                 <option value="General Query">General Query</option>
                                             </select>
-
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">State</label>
@@ -174,7 +199,6 @@ else{
                                                 }
                                                 ?>
                                             </select>
-
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">City</label>
@@ -189,52 +213,46 @@ else{
                                                 }
                                                 ?>
                                             </select>
-
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Address</label>
                                             <input type="text" name="address" required="required" value="" class="form-control">
                                         </div>
                                         <div class="form-group">
+                                            <label for="exampleInputEmail1">Latitude</label>
+                                            <input type="text" id="latitude" name="latitude" required="required" value="" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Longitude</label>
+                                            <input type="text" id="longitude" name="longitude" required="required" value="" class="form-control">
+                                        </div>
+                                        <div id="map" style="height: 400px; width: 100%;"></div>
+                                        <div class="form-group">
                                             <label for="exampleInputEmail1">Nature of Complaint</label>
                                             <input type="text" name="noc" required="required" value="" required="" class="form-control">
-
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Complaint Details (max 2000 words)</label>
                                             <textarea  name="complaindetails" required="required" cols="10" rows="10" class="form-control" maxlength="2000"></textarea>
-
                                         </div>
-
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Complaint Related Doc(if any)</label>
                                             <input type="file" name="compfile" class="form-control" value="">
-
                                         </div>
                                         <button type="submit" class="btn  btn-primary" name="submit">Submit</button>
                                     </form>
                                 </div>
-
                             </div>
-
-
                         </div>
                     </div>
-
                 </div>
-                <!-- [ form-element ] end -->
             </div>
             <!-- [ Main Content ] end -->
-
         </div>
     </section>
-
-    <!-- Required Js -->
     <script src="../admin/assets/js/vendor-all.min.js"></script>
     <script src="../admin/assets/js/plugins/bootstrap.min.js"></script>
     <script src="../admin/assets/js/pcoded.min.js"></script>
-
 </body>
-
 </html>
 <?php } ?>

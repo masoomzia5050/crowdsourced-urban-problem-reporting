@@ -90,7 +90,6 @@ else {
     <!-- [ navigation menu ] end -->
     <!-- [ Header ] start -->
     <?php include('include/header.php');?>
-
     <!-- [ Main Content ] start -->
     <section class="pcoded-main-container">
         <div class="pcoded-content">
@@ -111,7 +110,6 @@ else {
                 </div>
             </div>
             <!-- [ breadcrumb ] end -->
-
             <!-- [ Main Content ] start -->
             <div class="row">
                 <div class="col-md-6">
@@ -247,15 +245,15 @@ else {
                 <div class="modal-body text-center">
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="userimages/potholes.jpg" class="modal-image" alt="Potholes" onclick="redirectToComplaint('potholes')">
+                            <img src="userimages/potholes.jpg" class="modal-image" alt="Potholes" onclick="redirectToComplaint('Potholes')">
                             <p><b>Potholes</b></p>
                         </div>
                         <div class="col-md-4">
-                            <img src="userimages/street.jpeg" class="modal-image" alt="Street Lights" onclick="redirectToComplaint('street')">
+                            <img src="userimages/street.jpeg" class="modal-image" alt="Street Lights" onclick="redirectToComplaint('Street Lights')">
                             <p><b>Street Lights</b></p>
                         </div>
                         <div class="col-md-4">
-                            <img src="userimages/waste-management.jpg" class="modal-image" alt="Waste Management" onclick="redirectToComplaint('waste-management')">
+                            <img src="userimages/waste-management.jpg" class="modal-image" alt="Waste Management" onclick="redirectToComplaint('Waste Management')">
                             <p><b>Waste Management</b></p>
                         </div>
                     </div>

@@ -7,7 +7,7 @@ if(strlen($_SESSION['id'])==0)
 }
 else{
     date_default_timezone_set('Asia/Kolkata');// change according timezone
-    $currentTime = date( 'd-m-Y h:i:s A', time () );
+    $currentTime = date('d-m-Y h:i:s A', time());
 
 ?>
 <!DOCTYPE html>
@@ -16,6 +16,7 @@ else{
     <title>CMS || Complaint Details</title>
     <!-- vendor css -->
     <link rel="stylesheet" href="../admin/assets/css/style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>
     <script language="javascript" type="text/javascript">
     var popUpWin=0;
     function popUpWindow(URLStr, left, top, width, height)
@@ -24,9 +25,23 @@ else{
         {
             if(!popUpWin.closed) popUpWin.close();
         }
-        popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width='+600+',height='+600+',left='+left+', top='+top+',screenX='+left+',screenY='+top+'');
+        popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width='+600+',height='+600+',left='+left+', top='+top);
     }
-    </script>   
+    </script>
+    <script>
+    function initMap() {
+        var lat = parseFloat(document.getElementById('latitude').textContent);
+        var lng = parseFloat(document.getElementById('longitude').textContent);
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: lat, lng: lng},
+            zoom: 15
+        });
+        var marker = new google.maps.Marker({
+            position: {lat: lat, lng: lng},
+            map: map
+        });
+    }
+    </script>
 </head>
 <body class="">
     <?php include('include/sidebar.php');?>
@@ -125,6 +140,17 @@ else{
                                                                     <?php 
                                                                 } 
                                                                 ?>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Latitude</b></td>
+                                                            <td id="latitude"><?php echo htmlentities($row['latitude']);?></td>
+                                                            <td><b>Longitude</b></td>
+                                                            <td id="longitude"><?php echo htmlentities($row['longitude']);?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="6">
+                                                                <div id="map" style="height: 400px; width: 100%;"></div>
                                                             </td>
                                                         </tr>
                                                         <tr>
